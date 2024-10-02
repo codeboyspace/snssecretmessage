@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Secret Message Wall</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-image" style="background-image: url('https://i.scdn.co/image/ab67616d0000b273e476974d981a371a607b017f'); background-size: cover; background-position: center; background-attachment: fixed; filter: blur(5px);"></div>
+    <div class="container">
+        <h1 style="color: white; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Secret Message Wall for Students</h1>
+		<div class="message-box">
+			<textarea id="message" placeholder="Type your message...
+(We dont collect your data and no Tech Genius can find you)"></textarea>
+		</div>
+		<div class="dropdown">
+			<select id="options">
+				<option value="">Select your department</option>
+				<option value="cst">CST</option>
+				<option value="aids">AIDS</option>
+				<option value="cse">CSE</option>
+                <option value="iot">IoT</option>
+                <option value="it">IT</option>
+				<option value="csd">CSD</option>
+                <option value="ece">ECE</option>
+                <option value="eee">EEE</option>
+                <option value="mct">MCT</option>
+			</select>
+		</div>
+		<div class="send-button">
+			<button id="send">Send</button>
+		</div>
+		<div id="myProgress">
+			<div id="myBar"></div>
+		</div>
+		<div id="error-message"></div>
+	</div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+(function(){
+        emailjs.init("qhf0yg3mjA8tX0oQ9");  // Initialize EmailJS with your user ID
+})();
+    </script>
+
+    <script>
+      const sendButton = document.getElementById('send');
+      const messageBox = document.getElementById('message');
+      const optionsSelect = document.getElementById('options');
+      const progressBar = document.getElementById('myBar');
+      const errorMessage = document.getElementById('error-message');
+
+      sendButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        let message = messageBox.value.trim();
+        let selectedDepartment = optionsSelect.value;
+
+        if(message === ""){
+            alert("Type a message before tapping 'Send'");
+            return;
+        }
+
+        if (selectedDepartment === "") {
+            alert("Please select your department");
+            return;
+        }
+
+        // Map departments to HOD email addresses
+        let email = {
+          message: message,
+          sendto: ''
+        };
+
+        switch(selectedDepartment) {
+          case 'ece':
+            email.sendto = 'hod.ece@snsce.ac.in';
+            break;
+          case 'iot':
+            email.sendto = 'surya.a.iot.2022@snsce.ac.in';
+            break;
+          case 'csd':
+            email.sendto = 'hod.csd@snsce.ac.in';
+            break;
+          case 'it':
+            email.sendto = 'hod.it@snsce.ac.in';
+            break;
+          case 'eee':
+            email.sendto = 'hod.eee@snsce.ac.in';  // Correct this if needed
+            break;
+          case 'cse':
+            email.sendto = 'hod.cse@snsce.ac.in';
+            break;
+          case 'cst':
+            email.sendto = 'hod.cst@snsce.ac.in';  // Correct this if needed
+            break;
+          case 'aids':
+            email.sendto = 'hod.aids@snsce.ac.in';  // Correct this if needed
+            break;
+          case 'mct':
+            email.sendto = 'hod.mct@snsce.ac.in';
+            break;
+          default:
+            alert("Invalid department selected");
+            return;
+        }
+
+        // Check if the recipient email is set correctly
+        console.log("Sending email to:", email.sendto);
+
+        // Show progress bar
+        let i = 0;
+        function move() {
+          if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("myBar");
+            var width = 1;
+            var id = setInterval(frame, 10);
+            function frame() {
+              if (width >= 100) {
+                clearInterval(id);
+                i = 0;
+              } else {
+                width++;
+                elem.style.width = width + "%";
+              }
+            }
+          }
+        }
+
+        // Call move() function
+        move();
+
+        // Send the email using EmailJS
+        emailjs.send("service_tx8duan", "template_p2cst3f", {
+          message: email.message,
+          sendto: email.sendto // Use 'to_email' to map recipient email
+        }).then((response) => {
+          progressBar.style.width = '100%';
+          progressBar.style.backgroundColor = 'green';
+          errorMessage.textContent = 'Message sent: 200 ok';
+          alert("Message sent to your respective HOD");
+        }, (err) => {
+          console.error('Error sending email:', err);
+          progressBar.style.width = '100%';
+          progressBar.style.backgroundColor = 'red';
+          errorMessage.textContent = 'Error sending message';
+        });
+      });
+    </script>
+</body>
+</html>
