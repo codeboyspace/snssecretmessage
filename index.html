@@ -24,6 +24,7 @@
                 <option value="ece">ECE</option>
                 <option value="eee">EEE</option>
                 <option value="mct">MCT</option>
+				<option value="td">FORCELY SEND TO TECHNICAL DIRECTOR</option>
 			</select>
 		</div>
 		<div class="send-button">
@@ -72,11 +73,13 @@
         };
 
         switch(selectedDepartment) {
+	  case 'td':
+	    email.sendto='wtd.sns@gmail.com';
           case 'ece':
             email.sendto = 'hod.ece@snsce.ac.in';
             break;
           case 'iot':
-            email.sendto = 'surya.a.iot.2022@snsce.ac.in';
+            email.sendto = 'hod.csd@snsce.ac.in';
             break;
           case 'csd':
             email.sendto = 'hod.csd@snsce.ac.in';
