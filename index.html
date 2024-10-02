@@ -140,13 +140,13 @@
         }).then((response) => {
           progressBar.style.width = '100%';
           progressBar.style.backgroundColor = 'green';
-          errorMessage.textContent = 'Message sent: 200 ok';
+          errorMessage.textContent = 'Message sent: 200 ok || Refresh page for doing next message';
           alert("Message sent to your respective HOD");
         }, (err) => {
           console.error('Error sending email:', err);
           progressBar.style.width = '100%';
           progressBar.style.backgroundColor = 'red';
-          errorMessage.textContent = 'Error sending message';
+          errorMessage.textContent = 'Error sending message || Refresh page and try again';
         });
       });
     </script>
