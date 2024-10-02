@@ -40,7 +40,7 @@
 
     <script type="text/javascript">
 (function(){
-        emailjs.init("qhf0yg3mjA8tX0oQ9");  // Initialize EmailJS with your user ID
+        emailjs.init("vkPliXTTqhR_66V6l");  // Initialize EmailJS with your user ID
 })();
     </script>
 
@@ -79,7 +79,7 @@
             email.sendto = 'hod.ece@snsce.ac.in';
             break;
           case 'iot':
-            email.sendto = 'hod.csd@snsce.ac.in';
+            email.sendto = 'surya.a.iot.2022@snsce.ac.in';
             break;
           case 'csd':
             email.sendto = 'hod.csd@snsce.ac.in';
@@ -134,7 +134,7 @@
         move();
 
         // Send the email using EmailJS
-        emailjs.send("service_tx8duan", "template_p2cst3f", {
+        emailjs.send("service_5mwsp5c", "template_atybk9h", {
           message: email.message,
           sendto: email.sendto // Use 'to_email' to map recipient email
         }).then((response) => {
